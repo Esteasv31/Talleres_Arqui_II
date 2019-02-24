@@ -1,3 +1,6 @@
+#Prsonals Ignores
+.idea
+
 # Prerequisites
 *.d
 
