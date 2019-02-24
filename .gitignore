@@ -1,5 +1,7 @@
 #Prsonals Ignores
 .idea
+./Taller 2/src/piPar
+./Taller 2/src/piSerial
 
 # Prerequisites
 *.d
