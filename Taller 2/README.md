@@ -4,7 +4,7 @@
 
 gcc pi.c -o piSerial -fopenmp
 
-## Compile Pi-Paraller
+## Compile Pi-Parallel
 
 gcc pi_par.c -o piPar -fopenmp
 
