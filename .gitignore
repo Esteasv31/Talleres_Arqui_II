@@ -4,6 +4,7 @@
 ./Taller 2/src/piSerial
 ./Taller 2/SAXPY/saxpySerial
 ./Taller 2/SAXPY/saxpyParallel
+./Taller 2/application/app
 
 # Prerequisites
 *.d
