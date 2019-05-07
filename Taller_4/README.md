@@ -54,7 +54,7 @@ abd push ../libs/armeabi-v7a/name_of_test_file /data/local/tmp
 adb shell /data/local/tmp/name_of_test_file
 ```
 
-## Testing
+## Results
 
 ### saxpy_serial
 
