@@ -3,7 +3,7 @@
 #include <omp.h>
 #include <math.h>
 
-static long num_steps = 100000000;
+static long steps = 100000000;
 double step;
 
 int factorial(int n)
@@ -29,14 +29,14 @@ int factorial(int n)
 
 int main()
 {
-    double start_time, run_time;
+    double start, run_time;
     double k;
     double f1, f2, f;
     double n = 17;
     float angle = 0.5;
-    float seno = 0.0;
+    float sin = 0.0;
 
-    start_time = omp_get_wtime();
+    start = omp_get_wtime();
 #pragma opm parallel for private(k, n) reduction(+ \
                                                  : seno)
     {
@@ -45,14 +45,14 @@ int main()
             f1 = pow(-1, k);
             f2 = pow(angle, 2 * k + 1);
             f = factorial(2 * k + 1);
-            seno += f1 * f2 / f;
+            sin += f1 * f2 / f;
         }
     }
-    run_time = omp_get_wtime() - start_time;
+    run_time = omp_get_wtime() - start;
 
     printf(" Run time: %f\n", run_time);
     fflush(stdout);
-    printf(" Sen , iterations, angle = [%f, %f, %f ]\n", seno, n, angle);
+    printf(" Sin , iterations, angle = [%f, %f, %f ]\n", sin, n, angle);
     fflush(stdout);
 
     return 0;
