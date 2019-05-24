@@ -4,23 +4,16 @@
 // size of the square matrix
 #define N 4
 
-//Cuda error checking - non mandatory
-void cudaCheckError() {
- cudaError_t e=cudaGetLastError();
- if(e!=cudaSuccess) {
-   printf("Cuda failure %s:%d: '%s'\n",__FILE__,__LINE__,cudaGetErrorString(e));
-   exit(0);
- }
-}
-
-
 // GPU kernel
 __global__ 
 void saxpy(int x, int *A, int *B, int *C){
-	int i = blockIdx.x * blockDim.x + threadIdx.x;
- 	if (i < N){ 
-		C[i] = x * A[i] + B[i];
-	}
+	int i = threadIdx.x + blockDim.x * blockIdx.x;
+        int j = threadIdx.y + blockDim.y * blockIdx.y;
+        while (j < ((N*3)+1)){
+                C[i+j] = x * A[i+j] + B[i+j];
+                j++;
+        }
+
 }
 
 //CPU function
@@ -61,7 +54,6 @@ int main(int argc, char **argv){
 	clock_t start_d=clock();
     	printf("Doing GPU Vector app\n\n");
   	saxpy<<<dimGrid, dimBlock>>>(N * 3, dev_a, dev_b, dev_c);
-	cudaCheckError();
 
 	//Wait for kernel call to finish
     	cudaThreadSynchronize();
